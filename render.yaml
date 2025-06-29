@@ -2,12 +2,14 @@ services:
   - type: web
     name: mcp-server
     env: python
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install --no-cache-dir -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: 3.13.4
+      - key: PIP_NO_CACHE_DIR
+        value: 1
       - key: GITHUB_TOKEN
         sync: false
       - key: JIRA_URL
